@@ -67,13 +67,13 @@ function validation(age, gender, heightInM, weightInKg){
         
         First Name      i.e Lucy
         Age (years)     i.e 37
+        Gender          i.e f
         Height (m)      i.e 1.62
         Weight (kg)     i.e 45
         Daily Exercise  i.e yes
-        Gender          i.e f
         
         Example:
-        ...node task.js Lucy 37 1.62 45 yes f`
+        ...node task.js Lucy 37 f 1.62 45 yes`
     } else {
         lengthMistake = false
     };
@@ -81,12 +81,12 @@ function validation(age, gender, heightInM, weightInKg){
         return `
         Please make sure that the age, height, and weight are in numbers
         
-        Age (years)     i.e 37      | You inputed: ${process.argv[3]}
-        Height (m)      i.e 1.62    | You inputed: ${process.argv[4]}
-        Weight (kg)     i.e 45      | You inputed: ${process.argv[5]}
+        Age (years)     i.e 37      | You inputed: ${age}
+        Height (m)      i.e 1.62    | You inputed: ${heightInM}
+        Weight (kg)     i.e 45      | You inputed: ${weightInKg}
         
         Example:
-        ...node task.js Lucy 37 1.62 45 yes f`
+        ...node task.js Lucy 37 f 1.62 45 yes`
     } else {
         numberMistake = false
     };
@@ -100,7 +100,7 @@ function validation(age, gender, heightInM, weightInKg){
         Female  = f
         
         Example:
-        ...node task.js Lucy 37 1.62 45 yes f`
+        ...node task.js Lucy 37 f 1.62 45 yes`
     };
     if ((numberMistake === false)&&(lengthMistake === false)&&(genderMistake === false)) {
         return false
@@ -152,10 +152,10 @@ To achieve your ideal weight of ${userObj.idealWeight} kg, you must consume ${us
 
 function healthInfo(){
     const name = process.argv[2];
-    const age = parseInt(process.argv[3]);
+    const age = process.argv[3];
     const gender = process.argv[4];
-    const heightInM = parseFloat(process.argv[5]);
-    const weightInKg = parseInt(process.argv[6]);
+    const heightInM = process.argv[5];
+    const weightInKg = process.argv[6];
     const dailyExercise = process.argv[7];
     
     const validationError = validation(age, gender, heightInM, weightInKg);
@@ -171,10 +171,10 @@ function healthInfo(){
 
     const user = {
         name: name,
-        age: age,
-        gender: gender,
-        heightInM: heightInM,
-        weightInKg: weightInKg,
+        age: parseInt(age),
+        gender: gender.toUpperCase(),
+        heightInM: parseFloat(heightInM),
+        weightInKg: parseInt(weightInKg),
         dailyExercise: dailyExercise,
         BMI: BMI,
         idealWeight: idealWeight,
